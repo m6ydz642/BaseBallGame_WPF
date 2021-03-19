@@ -54,18 +54,22 @@
         </dxmvvm:Interaction.Behaviors>-->
 
 
-        <dxg:GridControl x:Name="scoreListView" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="255,39,0,0" VerticalAlignment="Top" Height="231" Width="510" ItemsSource="{Binding DataTable}" Grid.Row="1">
+        <dxg:GridControl x:Name="scoreListView" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="271,9,0,0" VerticalAlignment="Top" Height="231" Width="510" ItemsSource="{Binding DataTable}" Grid.Row="1">
             <dxg:GridControl.View>
-                <dxg:TableView ShowTotalSummary="True" Margin="0,0,8,58"/>
+                <dxg:TableView ShowTotalSummary="True" Margin="0,3,8,55"/>
             </dxg:GridControl.View>
         </dxg:GridControl>
 
         <!--재시작 눌렀을때 변경되게 바꾸던지 해야 됨) -->
         <!--<Label   x:Name="randomnumber" Content="{Binding RandomNumberDisplay}" HorizontalAlignment="Left" Margin="60,29,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>-->
         <Label   x:Name="randomnumber" Content="랜덤번호" HorizontalAlignment="Left" Margin="60,254,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
-    
 
 
+        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="271,219,0,0" VerticalAlignment="Top" Height="231" Width="510" ItemsSource="{Binding DataTable}" Grid.Row="1">
+            <dxg:GridControl.View>
+                <dxg:TableView ShowTotalSummary="True" Margin="0,3,8,55"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
 
     </Grid>
 </Page>
