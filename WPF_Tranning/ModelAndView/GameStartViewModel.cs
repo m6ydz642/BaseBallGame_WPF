@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 
 using System.Windows.Input;
@@ -49,6 +51,23 @@ namespace WPF_Tranning
             }
         }
         /**********************************************************************/
+        string AppconfigDBSetting = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString; // DB연결
+        /**********************************************************************/
+        public DataTable _selecttable;
+
+
+        public DataTable SelectTable
+        {
+            get { return _selecttable; }
+            set
+            {
+                _selecttable = value;
+                MessageBox.Show("데이터 테이블");
+                //   RaisePropertyChanged("DataTable");
+            }
+        }
+        /**********************************************************************/
+
         public interface IBaseCommand : ICommand
         {
                void OnCanExecuteChanged();
@@ -77,10 +96,26 @@ namespace WPF_Tranning
             _datatable.Columns.Add("사용자 입력");
             _datatable.Columns.Add("점수");
 
-      
+          //  DataSet dataSet = connectDB();
+            _selecttable = connectDB().Tables[0]; // select한 값 넣음
 
         }
 
+        public DataSet connectDB()
+        {
+            string selectQuery = ConfigurationManager.AppSettings["selectScore"];
+            SqlConnection connection = new SqlConnection(AppconfigDBSetting);
+            connection.Open(); // DB연결
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(selectQuery, connection); // DB통로
+            DataSet dataSet = new DataSet();
+            sqlDataAdapter.Fill(dataSet); // dataset으로 채움
+            /*  
+              dataGridView1.DataSource = dataSet.Tables[0];*/
+
+            // DataSet 리턴받아 호출하는 곳에서 나머지 Tables등 실행함
+            return dataSet;
+        }
 
         private void RaisePropertyChanged(string propertyName)
         {
