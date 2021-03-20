@@ -69,7 +69,7 @@
         <Label   x:Name="randomnumber" Content="랜덤번호" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
 
 
-        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="181,218,0,0" VerticalAlignment="Top" Height="323" Width="849" ItemsSource="{Binding SelectTable}" RenderTransformOrigin="0.5,0.5">
+        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="181,218,0,0" VerticalAlignment="Top" Height="323" Width="849" ItemsSource="{Binding SelectTable}">
             <dxg:GridControl.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -97,7 +97,7 @@
 
 
             <dxg:GridControl.View>
-                <dxg:TableView ShowTotalSummary="True" Margin="0,4,8,55" RenderTransformOrigin="0.5,0.5">
+                <dxg:TableView ShowTotalSummary="True" Margin="0,4,8,55">
                     <dxg:TableView.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -112,6 +112,7 @@
 
 
         </dxg:GridControl>
+        <Button Command="{Binding CheckBox}" x:Name="valuebutton" Content="클릭" HorizontalAlignment="Left" Margin="181,560,0,0" VerticalAlignment="Top" Width="119"/>
 
     </Grid>
 </Page>

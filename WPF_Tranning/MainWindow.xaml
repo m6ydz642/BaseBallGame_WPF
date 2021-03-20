@@ -35,7 +35,7 @@
         </Grid.ColumnDefinitions>-->
 
 
-        <dxwui:NavigationFrame Name="nav_content" Content="네비게이션 프레임" HorizontalAlignment="Left" Margin="4,100,0,0" VerticalAlignment="Top" Height="487" Width="541"/>
+        <dxwui:NavigationFrame Name="nav_content" Content="네비게이션 프레임" HorizontalAlignment="Left" Margin="4,100,0,0" VerticalAlignment="Top" Height="581" Width="1247"/>
 
         <!--<dxwui:NavigationFrame Name ="nav_content" Content="야구게임에 오신것을 환영합니다!" HorizontalAlignment="Left" Margin="0,72,0,0" VerticalAlignment="Top" Height="335" Width="770" Grid.ColumnSpan="2"/>-->
         <!--이거 버전 문제 때문에 위에껀 안됨 ㅡ.ㅡ-->
