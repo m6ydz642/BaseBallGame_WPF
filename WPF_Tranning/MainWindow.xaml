@@ -6,25 +6,26 @@
         xmlns:local="clr-namespace:WPF_Tranning"
         xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui" x:Class="WPF_Tranning.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="527" Width="849">
+        Title="MainWindow" Height="722" Width="1269">
 
 
-    <Grid Margin="10,10,2,-6">
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="405*"/>
-            <ColumnDefinition Width="424*"/>
-        </Grid.ColumnDefinitions>-->
-        <Grid Margin="0,-10,0,0">
+    <Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="800"/>
+            </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-   
+                <RowDefinition Height="90"/>
+              
             </Grid.RowDefinitions>
 
 
 
-            <Button Name="btnmain" Margin="170,0,544,447" Content="소개" Click="btnmain_Click"/>
-            <Button Name="btnstart" Margin="0,0,699,447" Content="게임하기" Click="btnstart_Click"/>
+            <Button Name="btnmain" Margin="295,10,688,25" Content="소개" Click="btnmain_Click" Grid.ColumnSpan="2"/>
+            <Button Name="btnstart" Margin="10,10,210,25" Content="게임하기" Click="btnstart_Click"/>
         </Grid>
 
 
@@ -34,7 +35,7 @@
         </Grid.ColumnDefinitions>-->
 
 
-        <dxwui:NavigationFrame Name="nav_content" Content="네비게이션 프레임" HorizontalAlignment="Left" Margin="4,100,0,0" VerticalAlignment="Top" Height="355" Width="815"/>
+        <dxwui:NavigationFrame Name="nav_content" Content="네비게이션 프레임" HorizontalAlignment="Left" Margin="4,100,0,0" VerticalAlignment="Top" Height="487" Width="541"/>
 
         <!--<dxwui:NavigationFrame Name ="nav_content" Content="야구게임에 오신것을 환영합니다!" HorizontalAlignment="Left" Margin="0,72,0,0" VerticalAlignment="Top" Height="335" Width="770" Grid.ColumnSpan="2"/>-->
         <!--이거 버전 문제 때문에 위에껀 안됨 ㅡ.ㅡ-->

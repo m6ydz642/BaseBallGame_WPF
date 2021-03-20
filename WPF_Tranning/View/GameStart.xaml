@@ -6,19 +6,19 @@
       xmlns:local="clr-namespace:WPF_Tranning" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
       xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="WPF_Tranning.GameStart"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="722" d:DesignWidth="1269"
+    
       Title="GameStart"
        x:Name="startGameElement">
 
 
 
 
-    <Grid Margin="0,0,-40,-85">
+    <Grid>
 
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
         <!--<TextBlock Grid.RowSpan="2" Margin="0,10,-40,-115"><Run Text="Start Game!!"/><Run Text=";;;;;;"/></TextBlock>-->
 
@@ -59,7 +59,7 @@
         </dxmvvm:Interaction.Behaviors>-->
 
 
-        <dxg:GridControl x:Name="scoreListView" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="181,9,0,0" VerticalAlignment="Top" Height="191" Width="614" ItemsSource="{Binding DataTable}">
+        <dxg:GridControl x:Name="scoreListView" AutoGenerateColumns="AddNew" HorizontalAlignment="Left" Margin="181,9,0,0" VerticalAlignment="Top" Height="191" Width="834" ItemsSource="{Binding DataTable}">
             <dxg:GridControl.View>
                 <dxg:TableView ShowTotalSummary="True" Margin="0,3,8,55"/>
             </dxg:GridControl.View>
@@ -69,7 +69,15 @@
         <Label   x:Name="randomnumber" Content="랜덤번호" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
 
 
-        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="181,219,0,0" VerticalAlignment="Top" Height="271" Width="614" ItemsSource="{Binding SelectTable}">
+        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" HorizontalAlignment="Left" Margin="181,218,0,0" VerticalAlignment="Top" Height="323" Width="849" ItemsSource="{Binding SelectTable}" RenderTransformOrigin="0.5,0.5">
+            <dxg:GridControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.358"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </dxg:GridControl.RenderTransform>
             <!--테스트로 이부분은 header로 바꿔봄-->
             <dxg:GridColumn FieldName="카운트"/>
             <dxg:GridColumn FieldName="내용"/>
@@ -82,14 +90,23 @@
                 <dxg:GridColumn.CellTemplate>
                     <DataTemplate>
                         <!--<CheckBox Name="chkSelect"  HorizontalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.RowData.Row.MediaSelected}"  Checked="CheckEdit_Checked" Unchecked="CheckEdit_Unchecked" />-->
-                        <CheckBox Name="chkSelect" IsChecked="{Binding Test}" HorizontalAlignment="Center" />
+                        <CheckBox Name="chkSelect" IsChecked="False" HorizontalAlignment="Center" />
                     </DataTemplate>
                 </dxg:GridColumn.CellTemplate>
             </dxg:GridColumn>
 
 
             <dxg:GridControl.View>
-                <dxg:TableView ShowTotalSummary="True" Margin="0,3,8,55"/>
+                <dxg:TableView ShowTotalSummary="True" Margin="0,4,8,55" RenderTransformOrigin="0.5,0.5">
+                    <dxg:TableView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0.005"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0.011"/>
+                        </TransformGroup>
+                    </dxg:TableView.RenderTransform>
+                </dxg:TableView>
             </dxg:GridControl.View>
 
 
