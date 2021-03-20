@@ -96,8 +96,13 @@ namespace WPF_Tranning
             _datatable.Columns.Add("사용자 입력");
             _datatable.Columns.Add("점수");
 
-          //  DataSet dataSet = connectDB();
-            _selecttable = connectDB().Tables[0]; // select한 값 넣음
+            _selecttable = new DataTable(); // 임시로 줄추가 
+            _selecttable.Columns.Add("호우"); // 임시로 추가
+            _selecttable.Rows.Add("와우"); // 임시로 추가
+
+            //  DataSet dataSet = connectDB();
+            // _selecttable = connectDB().Tables[0]; // select한 값 넣음
+           // _selecttable = "테스트";
 
         }
 
