@@ -1,4 +1,5 @@
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPF_Tranning
@@ -77,7 +78,10 @@ namespace WPF_Tranning
         
         }
 
-       
-       
+        private void valuebutton_Click(object sender, RoutedEventArgs e)
+        {
+            var row = clmAdd.ToString();
+            MessageBox.Show("row : " + row);
+        }
     }
 }

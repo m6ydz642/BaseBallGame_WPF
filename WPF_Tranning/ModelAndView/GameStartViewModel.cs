@@ -10,7 +10,7 @@ using WPF_Tranning;
 
 namespace WPF_Tranning
 {
- 
+
     public class GameStartViewModel : INotifyPropertyChanged
     {
 
@@ -21,6 +21,8 @@ namespace WPF_Tranning
         public ICommand Enter { get; set; } // 키패드 버튼 입력 후 게임 시작 버튼
 
         public bool StatusGateStart { set; get; } // 게임시작여부
+
+ 
 
         //View와 바인딩된 속성값이 바뀔때 이를 WPF에게 알리기 위한 이벤트
         public event PropertyChangedEventHandler PropertyChanged;
@@ -35,7 +37,19 @@ namespace WPF_Tranning
         CheckValue _checkvalue;
         public int _countGame;
 
-  
+        public ICommand _checkBinding;
+        public ICommand CheckBinding
+        {
+            get
+            {
+                return _checkBinding;
+            }
+            set
+            {   
+
+                _checkBinding = value;
+            }
+        }
         /**********************************************************************/
         public DataTable _datatable;
 
@@ -67,17 +81,17 @@ namespace WPF_Tranning
             }
         }
         /**********************************************************************/
-        public string _checkBox;
+  /*      public string _checkBox;
 
         public string CheckBox
         {
-            get { MessageBox.Show("앙 바인딩 : " + _checkBox) ;  return _checkBox;  }
+            get {*//* MessageBox.Show("앙 바인딩 : " + _checkBox) ;*//*  return _checkBox;  }
             set
             {
                 _checkBox = value;
             }
           
-        }
+        }*/
 
         public interface IBaseCommand : ICommand
         {
@@ -98,8 +112,9 @@ namespace WPF_Tranning
             this._checkvalue = new CheckValue();
             this.Retry = new Retry(this);
             this.Enter = new EnterGame(this);
+            this.CheckBinding  = new RelayCommand(new Action<object>(this.CheckBoxs)); 
 
-       
+
             //   Enter = new RelayCommand(new Action<object>(Enter.Execute));
 
             _datatable = new DataTable();
@@ -107,17 +122,21 @@ namespace WPF_Tranning
             _datatable.Columns.Add("사용자 입력");
             _datatable.Columns.Add("점수");
 
-           /* _selecttable = new DataTable(); // 임시로 줄추가 
-            _selecttable.Columns.Add("호우"); // 임시로 추가
-            _selecttable.Rows.Add("와우"); // 임시로 추가*/
+            /* _selecttable = new DataTable(); // 임시로 줄추가 
+             _selecttable.Columns.Add("호우"); // 임시로 추가
+             _selecttable.Rows.Add("와우"); // 임시로 추가*/
 
-              DataSet dataSet = connectDB();
-             _selecttable = connectDB().Tables[0]; // select한 값 넣음
-           // _selecttable = "테스트";
-           _checkBox = "체크박스";
+            //    DataSet dataSet = connectDB();
+
+            _selecttable = connectDB().Tables[0]; // select한 값 넣음
+
 
         }
 
+        private void CheckBoxs(object a)
+        {
+            MessageBox.Show("체크!");
+        }
      
         public DataSet connectDB()
         {
@@ -243,7 +262,6 @@ namespace WPF_Tranning
         public bool CanExecute(object parameter)
 
         {
-
             return this.canExecute == null || this.canExecute(parameter);
 
 
@@ -254,6 +272,7 @@ namespace WPF_Tranning
         public void Execute(object parameter)
 
         {
+            MessageBox.Show("클릭 Execute");
             this.execute(parameter ?? "널이얌"); // 앙 파라메터띠
         }
 
