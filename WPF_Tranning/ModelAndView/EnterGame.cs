@@ -1,3 +1,4 @@
+using BaseBallGame_WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,10 @@ namespace WPF_Tranning
     public class EnterGame : IBaseCommand
     {
 
-  
 
-        private GameStartViewModel viewModel;
-        GameStart game = new GameStart();
+        private Action<object> execute;
 
-        public EnterGame()
-        {
-            
-           
-        }
-
-        public EnterGame(GameStartViewModel viewModel)
-        {
-            this.viewModel = viewModel;
-        }
+        private Func<object, bool> canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -33,30 +23,34 @@ namespace WPF_Tranning
             remove { CommandManager.RequerySuggested += value; }
         }
 
-    
-        public bool CanExecute(object parameter) // 0이면 false해서 비활성화 처리
+        public EnterGame()
         {
- 
-            return viewModel.InputString.Length >= 3;
+
+        }
+        public EnterGame(Action<object> execute, Func<object, bool> canExecute = null)
+
+        {
+
+            this.execute = execute;
+            this.canExecute = canExecute;
+
+        }
+
+
+        public bool CanExecute(object parameter) 
+        {
+
+            //   return InputString.Length >= 3;'
+
+          //   return this.canExecute == null || this.canExecute(parameter);
+            return GameModel.GameStartStatus;
         }
         
 
         public void Execute(object parameter)
         {
+            this.execute(parameter ?? "널"); // 이거 없으면 원래 생성자 쪽에서 함수 호출 못해줌 (GameStartViewModel)
 
-            string value = viewModel.InputString; // 그냥 입력받았던거 그대로 컬럼명에 보여주는 단순한 표시용도임 실제 계산은 프로그램 내에서 할거
-
-
-            // checkvalue.inputNumber(value); // 입력받은 값을 배열로 만들어서 가지고 나감
-            // 객체생성 생성자에서 만들어 와서 해보려고 했는데 오류나서 일단 객체 생성해봄
-
-            inputNumber(value); // 입력받은 값을 배열로 만들어서 가지고 나감
-
-            viewModel._datatable.Rows.Add(++viewModel._countGame, value, calcScore());
-            viewModel.InputString = ""; // 엔터치면 초기화 함
-
-            calcScore();
-            viewModel.StatusGateStart = true; // 게임 시작시 true로 활성화, Retry.cs에도 영향을 받아서 재시작 버튼이 활성화 됨
         }
 
 
@@ -67,63 +61,7 @@ namespace WPF_Tranning
 
 
 
-        public int[] _inputNumberSave { get; set; }
-
-        public int[] _SaveScore { get; set; }
-
-
-        public int[] inputNumber(string value)
-        { // 사용자 입력값
-            char[] inputNumberString = value.ToCharArray();
-
-
-
-            _inputNumberSave = new int[3]; // new 연산자로 영역 생성안하니까 null뜨면서 안들
-
-            // char[] 타입을 int [] 타입으로
-            // 이거 어이없는게 0번(48) 아스키코드를 빼면 현재 숫자가 나옴
-            // 아스키코드로 49는 1인데 이걸 변환하려면 -48을 하면 1이나옴 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-
-            _inputNumberSave[0] = inputNumberString[0] - 48; 
-            _inputNumberSave[1] = inputNumberString[1] - 48;
-            _inputNumberSave[2] = inputNumberString[2] - 48;
-
-            // setter에 동시에 넣으면서
-            return _inputNumberSave; // setter값을 리턴함 비교는 컴퓨터가 만든 랜덤값과 할거임
-        }
-
-
-
-
-        public string calcScore() // 게임 점수계산 함수
-        {
-            int Strike = 0;// 게임시작시 사용자에게 한 회차끝나고 보여지는 점수 
-            int Ball = 0; // 게임시작시 사용자에게 한 회차끝나고 보여지는 점수 
-            string Message = "";
-            //   inputNumber = _inputNumberSave;
-            int[] RandNum = game._randomNumberArray;
-
-            for (int i = 0; i < _inputNumberSave.Length; i++)
-            {
-                if (RandNum[i] == _inputNumberSave[i])
-                {
-                    Strike++; // 사용자에게 보여지는 점수판
-                }
-
-                for (int j = 0; j < _inputNumberSave.Length; j++)
-                {
-                    if (RandNum[i] == _inputNumberSave[j] && i != j)
-                    {
- 
-                        Ball++;
-                    }
-                }
-                Message = Strike + "스트라이크 " + Ball + "볼";
-            }
-
-
-            return Message;
-        }
+      
 
     }
 }

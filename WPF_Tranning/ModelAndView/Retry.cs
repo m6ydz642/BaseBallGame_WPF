@@ -1,3 +1,4 @@
+using BaseBallGame_WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,12 @@ namespace WPF_Tranning
 {
     class Retry : IBaseCommand
     {
-        private GameStartViewModel viewModel;
+        private Action<object> execute;
+
+        private Func<object, bool> canExecute;
+      
+
+    
 
         // OnCanExecuteChanged 메소드의
         // ommandManager.InvalidateRequerySuggested()를 호출하면
@@ -23,25 +29,34 @@ namespace WPF_Tranning
             remove { CommandManager.RequerySuggested += value; }
         }
 
-        public Retry(GameStartViewModel viewModel)
+        public Retry()
         {
-            this.viewModel = viewModel;
+          
         }
+        public Retry(Action<object> execute, Func<object, bool> canExecute = null)
 
+        {
+
+            this.execute = execute;
+
+            this.canExecute = canExecute;
+
+        }
         public bool CanExecute(object parameter)
         {
-            return viewModel.StatusGateStart; // 일단 게임 초반은 false상태로 시작하기때문에 시작하자마자 재시작 버튼은 비활성화 상태임 
-
+            // MessageBox.Show("canExcute 호출");
+            //  return viewModel.StatusGateStart; // 일단 게임 초반은 false상태로 시작하기때문에 시작하자마자 재시작 버튼은 비활성화 상태임 
+            // return true;
+            int count = GameModel.Count;
+            return count >= 1 || GameModel.GameStartStatus == false;
         }
 
   
 
         public void Execute(object parameter)
         {
-            MessageBox.Show("게임을 다시시작합니다");
-            viewModel._countGame = 0;
-            viewModel._datatable.Rows.Clear(); // 그리드 뷰 초기화 (그리드 뷰를 초기화 하는게 아니라 그리드 뷰를
-            // 보여주게 설정해주는 변수를 초기화함
+            MessageBox.Show("retry Excute 호출 : " + GameModel.Count);
+            this.execute(parameter ?? "널"); // 이거 없으면 원래 생성자 쪽에서 함수 호출 못해줌 (GameStartViewModel)
 
         }
 

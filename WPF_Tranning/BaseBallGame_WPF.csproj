@@ -91,6 +91,8 @@
     <Compile Include="ModelAndView\CheckValue.cs" />
     <Compile Include="ModelAndView\AddNumberKeyPad.cs" />
     <Compile Include="ModelAndView\EnterGame.cs" />
+    <Compile Include="ModelAndView\GameModel.cs" />
+    <Compile Include="ModelAndView\RelayCommand.cs" />
     <Compile Include="ModelAndView\Retry.cs" />
     <Compile Include="View\GameStart.xaml.cs">
       <DependentUpon>GameStart.xaml</DependentUpon>
