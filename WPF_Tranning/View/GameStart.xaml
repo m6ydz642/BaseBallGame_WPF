@@ -5,24 +5,78 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_Tranning" xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
       xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="WPF_Tranning.GameStart"
-      mc:Ignorable="d" 
-      d:DesignHeight="722" d:DesignWidth="1269"
+      mc:Ignorable="d"
     
       Title="GameStart"
-       x:Name="startGameElement">
+       x:Name="startGameElement" Height="722" Width="1269">
 
 
 
 
-    <Grid>
+    <Grid ShowGridLines="True">
 
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="500"/>
         </Grid.RowDefinitions>
-        <!--<TextBlock Grid.RowSpan="2" Margin="0,10,-40,-115"><Run Text="Start Game!!"/><Run Text=";;;;;;"/></TextBlock>-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition/>
 
 
+        </Grid.ColumnDefinitions>
+
+        <dxg:GridControl Grid.Row="1" Grid.Column="1" x:Name="scoreListViewDB" AutoGenerateColumns="AddNew"  ItemsSource="{Binding SelectTable}" Margin="27,22,10,171"   >
+            <dxg:GridControl.View>
+                <dxg:TableView  ShowTotalSummary="True"/>
+            </dxg:GridControl.View>
+            <!--테스트로 이부분은 header로 바꿔봄-->
+            <dxg:GridColumn FieldName="카운트"/>
+            <dxg:GridColumn FieldName="내용"/>
+
+            <dxg:GridColumn FieldName="MediaSelected" Header="체크박스" x:Name="clmAdd" Width="100" AllowSorting="False">
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <!--<CheckBox Name="chkSelect"  HorizontalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.RowData.Row.MediaSelected}"  Checked="CheckEdit_Checked" Unchecked="CheckEdit_Unchecked" />-->
+                        <CheckBox Command="{Binding CheckBinding }" Name="chkSelect" IsChecked="False" HorizontalAlignment="Center" />
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+        </dxg:GridControl>
+
+
+        <dxg:GridControl Grid.Column="0" Grid.Row="1" x:Name="scoreListView" AutoGenerateColumns="AddNew" HorizontalAlignment="Left" Width="345" ItemsSource="{Binding DataTable}" Margin="195,22,0,171">
+            <dxg:GridControl.View>
+                <dxg:TableView ShowTotalSummary="True" Margin="0,3,-2,-2"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+
+        <Label   x:Name="keypad" Content="{Binding DisplayText}" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
+
+        <Button Command="{Binding Retry}" x:Name="Retry" Content="재시작" HorizontalAlignment="Left" Margin="20,163,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Row="1"/>
+        <Button Command="{Binding BackSpaceCommand}"  x:Name="Back" Content="지움" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
+        <Button x:Name="Clear" Content="삭제" HorizontalAlignment="Left" Margin="116,103,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
+        <Button Command="{Binding Enter}" x:Name="Enter" Content="엔터" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
+
+        <!--<dxmvvm:Interaction.Behaviors>
+            <dxmvvm:EventToCommand Command="{Binding DataContext.ClickCommend, ElementName=startGameElement}" EventName="Click" CommandParameter="{Binding ElementName=startGameElement, Mode=OneWay}"/>
+        </dxmvvm:Interaction.Behaviors>-->
+
+
+
+        <Label   x:Name="randomnumber" Content="랜덤번호" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
+
+        <!--체크박스 샘플 
+            https://johnnblade.wordpress.com/2012/05/24/grid-control-gridcontrol-with-celltemplate-and-checkbox-or-checkedit-unchecks-or-checks-other-unchecked-checkboxes-when-scrolling-or-checkbox-comes-up-when-new-visual-rows-displays-devexpress-wpf/
+            -->
+        <!-- DB내용 View -->
+
+
+
+
+        <Button Click="valuebutton_Click" Command="{Binding CheckBox}" x:Name="valuebutton" Content="클릭" HorizontalAlignment="Left" Margin="181,459,0,0" VerticalAlignment="Top" Width="119" Height="0" Grid.Row="1"/>
         <Button x:Name="key1" Content="1" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Width="38"  Command="{Binding ClickKeyPad}" CommandParameter="1" Height="22" Grid.Row="1"/>
         <Button x:Name="key2" Content="2" HorizontalAlignment="Left" Margin="37,76,0,0" VerticalAlignment="Top" Width="38" Command="{Binding ClickKeyPad}" CommandParameter="2" Height="22" Grid.Row="1"/>
         <Button x:Name="key3" Content="3" HorizontalAlignment="Left" Margin="77,76,0,0" VerticalAlignment="Top" Width="38"  Command="{Binding ClickKeyPad}"  CommandParameter="3" Height="22" Grid.Row="1"/>
@@ -44,53 +98,6 @@
                 </GridView>
             </ListView.View>
         </ListView>-->
-
-
-
-        <Label   x:Name="keypad" Content="{Binding DisplayText}" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
-
-        <Button Command="{Binding Retry}" x:Name="Retry" Content="재시작" HorizontalAlignment="Left" Margin="20,163,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Row="1"/>
-        <Button Command="{Binding BackSpaceCommand}"  x:Name="Back" Content="지움" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
-        <Button x:Name="Clear" Content="삭제" HorizontalAlignment="Left" Margin="116,103,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
-        <Button Command="{Binding Enter}" x:Name="Enter" Content="엔터" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Width="50" Height="22" Grid.Row="1"/>
-
-        <!--<dxmvvm:Interaction.Behaviors>
-            <dxmvvm:EventToCommand Command="{Binding DataContext.ClickCommend, ElementName=startGameElement}" EventName="Click" CommandParameter="{Binding ElementName=startGameElement, Mode=OneWay}"/>
-        </dxmvvm:Interaction.Behaviors>-->
-
-
-        <dxg:GridControl x:Name="scoreListView" AutoGenerateColumns="AddNew" HorizontalAlignment="Left" Margin="181,9,0,0" VerticalAlignment="Top" Height="191" Width="834" ItemsSource="{Binding DataTable}">
-            <dxg:GridControl.View>
-                <dxg:TableView ShowTotalSummary="True" Margin="0,3,8,55"/>
-            </dxg:GridControl.View>
-        </dxg:GridControl>
-
-        <Label   x:Name="randomnumber" Content="랜덤번호" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" Width="125" Height="26" Grid.Row="1"/>
-
-        <!--체크박스 샘플 
-            https://johnnblade.wordpress.com/2012/05/24/grid-control-gridcontrol-with-celltemplate-and-checkbox-or-checkedit-unchecks-or-checks-other-unchecked-checkboxes-when-scrolling-or-checkbox-comes-up-when-new-visual-rows-displays-devexpress-wpf/
-            -->
-        <!-- DB내용 View -->
-        <dxg:GridControl x:Name="scoreListViewDB" AutoGenerateColumns="AddNew" HorizontalAlignment="Left" Margin="181,218,0,0" VerticalAlignment="Top" Height="323" Width="849" ItemsSource="{Binding SelectTable}">
-            <dxg:GridControl.View>
-                <dxg:TableView  ShowTotalSummary="True" Margin="0,3,8,55"/>
-            </dxg:GridControl.View>
-            <!--테스트로 이부분은 header로 바꿔봄-->
-            <dxg:GridColumn FieldName="카운트" SortOrder="Ascending" SortIndex="0"/>
-            <dxg:GridColumn FieldName="내용"/>
-
-            <dxg:GridColumn FieldName="MediaSelected" Header="체크박스" x:Name="clmAdd" Width="100" AllowSorting="False">
-                <dxg:GridColumn.CellTemplate>
-                    <DataTemplate>
-                        <!--<CheckBox Name="chkSelect"  HorizontalAlignment="Center" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext.RowData.Row.MediaSelected}"  Checked="CheckEdit_Checked" Unchecked="CheckEdit_Unchecked" />-->
-                        <CheckBox Command="{Binding CheckBinding }" Name="chkSelect" IsChecked="False" HorizontalAlignment="Center" />
-                    </DataTemplate>
-                </dxg:GridColumn.CellTemplate>
-            </dxg:GridColumn>
-            
-
-        </dxg:GridControl>
-        <Button Click="valuebutton_Click" Command="{Binding CheckBox}" x:Name="valuebutton" Content="클릭" HorizontalAlignment="Left" Margin="181,560,0,0" VerticalAlignment="Top" Width="119"/>
 
     </Grid>
 </Page>
