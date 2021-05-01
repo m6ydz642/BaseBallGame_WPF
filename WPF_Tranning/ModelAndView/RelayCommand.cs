@@ -53,7 +53,7 @@ namespace BaseBallGame_WPF
         public void Execute(object parameter)
 
         {
-            MessageBox.Show("클릭 Execute");
+            // MessageBox.Show("클릭 Execute");
             this.execute(parameter ?? "널이얌"); // 앙 파라메터띠
         }
 

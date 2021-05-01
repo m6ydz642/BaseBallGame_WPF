@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseBallGame_WPF.ModelAndView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,12 @@ namespace WPF_Tranning
     /// <summary>
     /// Introduce.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class Introduce : Page
+    public partial class Introduce : UserControl
     {
         public Introduce()
         {
             InitializeComponent();
+            DataContext = new IntroducePageBinding();
         }
     }
 }
